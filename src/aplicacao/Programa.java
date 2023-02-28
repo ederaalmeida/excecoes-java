@@ -34,21 +34,14 @@ public class Programa {
             System.out.print("Data Saída (dd/MM/yyyy): ");
             dataSaida = formatacaoData.parse(entrada.next());
 
-            Date agora = new Date();
-
-            if (dataEntrada.before(agora) || dataSaida.before(agora)) {
-                System.out.println("Erro na reserva: Reserva para datas futuras para atualizar reserva");
+            String error = reserva.atualizaDatas(dataEntrada, dataSaida);
+            if (error != null) {
+                System.out.println("Erro na reserva: " + error);
             } else {
-                if (!dataSaida.after(dataEntrada)) {
-                    System.out.println("Erro na Reserva: Data saída precisa ser depois da data entrada");
-                }else{
-                    reserva.atualizaDatas(dataEntrada, dataSaida);
-                    System.out.println("Reserva: " + reserva);
-                }
+                System.out.println("Reserva: " + reserva);
             }
-
         }
-
         entrada.close();
     }
 }
+
